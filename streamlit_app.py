@@ -6,6 +6,11 @@ from random import seed, sample
 import pickle as pkle
 import os.path
 import pandas as pd
+import os
+import sys
+setupBaseDir = os.path.dirname(__file__)
+sys.path.insert(0, setupBaseDir)
+
 
 seed(1)
 N = 12
@@ -66,7 +71,8 @@ for k in range(1,N+1):
 
     
 if st.button('Send'):
-    df.to_csv('output.csv', mode='a', index=False, header=False) 
+    outfile = os.path.join(setupBaseDir, "output.csv")
+    df.to_csv(outfile, mode='a', index=False, header=False) 
     st.write('Thank you for your help!')
 #df.columns = ['ID', 'Nfemale', 'Nmale']  
 
