@@ -79,13 +79,14 @@ if submit_button:
     outfile = os.path.join(setupBaseDir, "output.csv")
     df.to_csv(outfile, mode='a', index=False, header=False)
     st.write("Thank you!")
+    
+with open("output.csv") as f:
+   st.download_button('', f)  # Defaults to 'text/plain' 
 
 #if st.button('Send'):
 #    df.to_csv(outfile, mode='a', index=False, header=False) 
     
 #df.columns = ['ID', 'Nfemale', 'Nmale']  
-with open("output.csv") as f:
-   st.download_button('Download CSV', f)  # Defaults to 'text/plain'
    
 # Try again
 #You can check .empty documentation
@@ -101,7 +102,9 @@ if btn:
     placeholder.empty()
     
 
-   
+st.write("\n\n"); st.write("\n\n"); st.write("\n\n"); st.write("\n\n")
+
+
 
     
 
