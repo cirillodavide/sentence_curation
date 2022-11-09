@@ -12,7 +12,7 @@ setupBaseDir = os.path.dirname(__file__)
 sys.path.insert(0, setupBaseDir)
 
 
-seed(1)
+#seed(1)
 N = 12
 
 # Create a connection object.
