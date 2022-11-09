@@ -74,12 +74,12 @@ with st.form(key='my_form'):
     
     submit_button = st.form_submit_button(label='Submit')
 
-        
-    if st.button('Send'):
-        outfile = os.path.join(setupBaseDir, "output.csv")
-        df.to_csv(outfile, mode='a', index=False, header=False) 
-        st.write('Thank you for your help!')
-    #df.columns = ['ID', 'Nfemale', 'Nmale']  
+outfile = os.path.join(setupBaseDir, "output.csv")
+   
+if st.button('Send'):
+    df.to_csv(outfile, mode='a', index=False, header=False) 
+    st.write('Thank you for your help!')
+#df.columns = ['ID', 'Nfemale', 'Nmale']  
 
 with open(outfile) as f:
    st.download_button('Download CSV', f)  # Defaults to 'text/plain'
