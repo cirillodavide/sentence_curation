@@ -19,5 +19,4 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
 for row in rows:
-    #st.write(f"{row.Sentence} has :{row.N_women}: number of women")
-    row
+    st.write(f"{row.Sentence} has :{row.N_women}: number of women")
