@@ -33,6 +33,8 @@ subset = sample(range(0,len(rows)), N)
 
 pages = range(1,N+1)
 
+st.write("Not ready yet! Thanks in advance :)")
+
 if os.path.isfile('next.p'):
     next_clicked = pkle.load(open('next.p', 'rb'))
     if next_clicked == len(pages):
@@ -55,11 +57,11 @@ st.write("Evaluate the number of males and females in the following sentences:")
 st.subheader(rows[subset[choice-1]].Sentence)
 
 st.write("Number of females")
-number = st.text_input("Insert a number or NA", value="", key="female")
+number = st.text_input("Insert a number or NA", value="", key="female"+str(choice))
 #st.write('The current number is ', number)
 
 st.write("Number of males")
-number = st.text_input("Insert a number or NA", value="", key="male")
+number = st.text_input("Insert a number or NA", value="", key="male"+str(choice))
 #st.write('The current number is ', number)
 
 
