@@ -76,7 +76,8 @@ if st.button('Send'):
     st.write('Thank you for your help!')
 #df.columns = ['ID', 'Nfemale', 'Nmale']  
 
-#df.to_csv('output.csv', mode='a', index=False, header=False) 
+with open(outfile) as f:
+   st.download_button('Download CSV', f)  # Defaults to 'text/plain'
     
 
     
