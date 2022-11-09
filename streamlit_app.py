@@ -77,7 +77,7 @@ with st.form(key='my_form'):
 
 if submit_button:
     outfile = os.path.join(setupBaseDir, "output.csv")
-    df.to_csv(outfile, mode='w', index=False, header=False)
+    df.to_csv(outfile, mode='a', index=False, header=False)
     st.write("Thank you!")
 
 #if st.button('Send'):
@@ -99,6 +99,8 @@ with placeholder.container():
 if btn:
     #This would empty everything inside the container
     placeholder.empty()
+    
+
    
 
     
