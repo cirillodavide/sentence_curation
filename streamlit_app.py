@@ -8,16 +8,9 @@ from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-SPREADSHEET_ID = "1NLDald77Dm7aG65E8saWWcHtQZoTnmnXVUzxiOxuEtw/edit#gid=0"
+SPREADSHEET_ID = "1QlPTiVvfRM82snGN6LELpNkOwVI1_Mp9J9xeJe-QoaA"
 SHEET_NAME = "Database"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-
-# Create API client.
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"]
-)
-client = bigquery.Client(credentials=credentials)
-
 
 @st.experimental_singleton()
 def connect_to_gsheet():
