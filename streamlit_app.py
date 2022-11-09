@@ -47,7 +47,8 @@ st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
 #st.write("Thanks!")
     
 df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )
-
+    
+    
 # Using the "with" syntax
 with st.form(key='my_form'):
 
@@ -65,25 +66,41 @@ with st.form(key='my_form'):
         Nmale = st.text_input("Insert a number or NA", value="", key="male"+str(k))
     #    st.write('The current number is ', Nmale)
         
-        new_row = [crow.ID, Nfemale, Nmale]
+        new_row = [str(int(crow.PreID)) + str(crow.ID), Nfemale, Nmale]
     #    new_row
     #    df = df.append(new_row, ignore_index=True)
         
         df.loc[len(df)] = new_row
     #    df
-    
-    outfile = os.path.join(setupBaseDir, "output.csv")
-    df.to_csv(outfile, mode='a', index=False, header=False) 
     submit_button = st.form_submit_button(label='Submit')
+    
 
+if submit_button:
+    outfile = os.path.join(setupBaseDir, "output.csv")
+    df.to_csv(outfile, mode='w', index=False, header=False)
+    st.write("Thank you!")
 
-st.write('Thank you for your help!')
 #if st.button('Send'):
 #    df.to_csv(outfile, mode='a', index=False, header=False) 
     
 #df.columns = ['ID', 'Nfemale', 'Nmale']  
-with open(outfile) as f:
+with open("output.csv") as f:
    st.download_button('Download CSV', f)  # Defaults to 'text/plain'
+   
+# Try again
+#You can check .empty documentation
+placeholder = st.empty()
+
+with placeholder.container():
+    st.title("Would you like to try again?")
+    btn = st.button("Go!")
+
+#If btn is pressed or True
+if btn:
+    #This would empty everything inside the container
+    placeholder.empty()
+   
+
     
 
     
