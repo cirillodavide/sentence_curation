@@ -48,33 +48,38 @@ st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
     
 df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )
 
-for k in range(1,N+1):
-    st.title(str(k))
-    crow = rows[subset[k-1]]
-    #subset[choice-1]
-    st.subheader(crow.Sentence)
-    
-    st.write("Number of females")
-    Nfemale = st.text_input("Insert a number or NA", value="", key="female"+str(k))
-#    st.write('The current number is ', Nfemale)
-    
-    st.write("Number of males")
-    Nmale = st.text_input("Insert a number or NA", value="", key="male"+str(k))
-#    st.write('The current number is ', Nmale)
-    
-    new_row = [crow.ID, Nfemale, Nmale]
-#    new_row
-#    df = df.append(new_row, ignore_index=True)
-    
-    df.loc[len(df)] = new_row
-#    df
+# Using the "with" syntax
+with st.form(key='my_form'):
 
+    for k in range(1,N+1):
+        st.title(str(k))
+        crow = rows[subset[k-1]]
+        #subset[choice-1]
+        st.subheader(crow.Sentence)
+        
+        st.write("Number of females")
+        Nfemale = st.text_input("Insert a number or NA", value="", key="female"+str(k))
+    #    st.write('The current number is ', Nfemale)
+        
+        st.write("Number of males")
+        Nmale = st.text_input("Insert a number or NA", value="", key="male"+str(k))
+    #    st.write('The current number is ', Nmale)
+        
+        new_row = [crow.ID, Nfemale, Nmale]
+    #    new_row
+    #    df = df.append(new_row, ignore_index=True)
+        
+        df.loc[len(df)] = new_row
+    #    df
     
-if st.button('Send'):
-    outfile = os.path.join(setupBaseDir, "output.csv")
-    df.to_csv(outfile, mode='a', index=False, header=False) 
-    st.write('Thank you for your help!')
-#df.columns = ['ID', 'Nfemale', 'Nmale']  
+    submit_button = st.form_submit_button(label='Submit')
+
+        
+    if st.button('Send'):
+        outfile = os.path.join(setupBaseDir, "output.csv")
+        df.to_csv(outfile, mode='a', index=False, header=False) 
+        st.write('Thank you for your help!')
+    #df.columns = ['ID', 'Nfemale', 'Nmale']  
 
 with open(outfile) as f:
    st.download_button('Download CSV', f)  # Defaults to 'text/plain'
