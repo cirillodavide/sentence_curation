@@ -41,11 +41,11 @@ def get_sample():
     
     return(rows,subset)
     
-def save_df(df):
-    outfile = os.path.join(setupBaseDir, "output.csv")
-    df.to_csv(outfile, mode='a', index=False, header=False)
-    st.write("Thank you!")
-    
+#def save_df(df):
+#    outfile = os.path.join(setupBaseDir, "output.csv")
+#    df.to_csv(outfile, mode='a', index=False, header=False)
+#    st.write("Thank you!")
+#    
     
 rows,subset = get_sample()
     
@@ -57,7 +57,7 @@ st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
 #st.write("Thanks!")
 df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )    
         
-with st.form(key='my_form', clear_on_submit=False):
+with st.form(key='my_form', clear_on_submit=True):
 
     for k in range(1,N+1):
         st.title(str(k))
@@ -81,7 +81,11 @@ with st.form(key='my_form', clear_on_submit=False):
         df.loc[len(df)] = new_row
           
     #    df
-    submit_button = st.form_submit_button(label='Submit', on_click=save_df, args=(df,))
+    submit_button = st.form_submit_button(label='Submit') # submit_button = st.form_submit_button(label='Submit', on_click=save_df, args=(df,))
+    if submit_button:
+        outfile = os.path.join(setupBaseDir, "output.csv")
+        df.to_csv(outfile, mode='a', index=False, header=False)
+        st.write("Thank you!")
     
 #if submit_button:
 #        outfile = os.path.join(setupBaseDir, "output.csv")
