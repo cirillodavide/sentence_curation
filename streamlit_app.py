@@ -56,11 +56,8 @@ else:
 #    rows = rows
 #    subset = subset
 
-"SUBSET"    
-subset
-
     
-st.title("Dear #Biohackathon2022,")
+st.title("Dear #BioHackEU22 friends,")
 st.subheader("Please evaluate the number of males and females in the following sentences:")
 #st.write("Please evaluate the number of males and females in the following sentences:")
 st.write("- If you are in doubt, put NA:")
@@ -86,8 +83,8 @@ with st.form(key='my_form', clear_on_submit=False):
         
         new_row = [str(int(crow.PreID)) + str(crow.ID), Nfemale, Nmale]
 
-        st.write(str(int(crow.PreID)) + str(crow.ID))
-        st.write(new_row)
+#        st.write(str(int(crow.PreID)) + str(crow.ID))
+#        st.write(new_row)
         
         df.loc[len(df)] = new_row
           
