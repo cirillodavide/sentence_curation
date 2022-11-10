@@ -21,7 +21,7 @@ conn = connect()
 # Perform SQL query on the Google Sheet.
 # Uses st.cache to only rerun when the query changes or after 10 min.
 #@st.cache(ttl=600)
-@st.cache
+#@st.cache
 def run_query(query):
     rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
@@ -30,7 +30,7 @@ def run_query(query):
 sheet_url = st.secrets["public_gsheets_url"]
 
 
-@st.cache
+#@st.cache
 def get_sample():
     rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
@@ -50,7 +50,7 @@ st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
 #st.write("Thanks!")
 df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )    
         
-with st.form(key='my_form'):
+with st.form(key='my_form', clear_on_submit=True):
 
     for k in range(1,N+1):
         st.title(str(k))
