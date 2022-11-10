@@ -96,7 +96,7 @@ with st.form(key='my_form', clear_on_submit=False):
     if submit_button:
         outfile = os.path.join(setupBaseDir, "output.csv")
         df.to_csv(outfile, mode='a', index=False, header=False)
-        st.write("Thank you!")
+        st.sucess("Thank you!")
     
 #if submit_button:
 #        outfile = os.path.join(setupBaseDir, "output.csv")
@@ -113,18 +113,18 @@ with open("output.csv") as f:
    
 # Try again
 #You can check .empty documentation
-placeholder = st.empty()
-
-# Refresh
-with placeholder.container():
-    st.title("Would you like to try again?")
-    btn = st.button("Go!")
-
-if btn:
-    #This would empty everything inside the container
-    rows,subset = get_sample()
-    st.session_state.subset = subset
-    placeholder.empty()
+#placeholder = st.empty()
+#
+## Refresh
+#with placeholder.container():
+#    st.title("Would you like to try again?")
+#    btn = st.button("Go!")
+#
+#if btn:
+#    #This would empty everything inside the container
+#    rows,subset = get_sample()
+#    st.session_state.subset = subset
+#    placeholder.empty()
     
 
 st.write("\n\n"); st.write("\n\n"); st.write("\n\n"); st.write("\n\n")
