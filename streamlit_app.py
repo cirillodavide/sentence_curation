@@ -20,7 +20,7 @@ conn = connect()
 
 # Perform SQL query on the Google Sheet.
 # Uses st.cache to only rerun when the query changes or after 10 min.
-#@st.cache(ttl=600)
+@st.cache(ttl=600)
 def run_query(query):
     rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
@@ -67,17 +67,13 @@ with st.form(key='my_form'):
         st.write(new_row)
         
         df.loc[len(df)] = new_row
-        
-        
+          
     #    df
-    outfile = os.path.join(setupBaseDir, "output.csv")
-    df.to_csv(outfile, mode='a', index=False, header=False)
     submit_button = st.form_submit_button(label='Submit')
     
-
 if submit_button:
-#    outfile = os.path.join(setupBaseDir, "output.csv")
-#    df.to_csv(outfile, mode='a', index=False, header=False)
+    outfile = os.path.join(setupBaseDir, "output.csv")
+    df.to_csv(outfile, mode='a', index=False, header=False)
     st.write("Thank you!")
     
 with open("output.csv") as f:
@@ -92,11 +88,11 @@ with open("output.csv") as f:
 #You can check .empty documentation
 placeholder = st.empty()
 
+# Refresh
 with placeholder.container():
     st.title("Would you like to try again?")
     btn = st.button("Go!")
 
-#If btn is pressed or True
 if btn:
     #This would empty everything inside the container
     placeholder.empty()
