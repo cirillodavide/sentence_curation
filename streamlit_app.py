@@ -33,9 +33,6 @@ subset = sample(range(0,len(rows)), N)
 #st.write("Subset")
 #subset
 
-# Print results.
-#for row in rows:
-#    st.write(f"{row.Sentence} has :{row.N_women}: number of women")
 
 pages = range(1,N+1)
 
@@ -48,8 +45,6 @@ st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
     
 df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )
     
-    
-# Using the "with" syntax
 with st.form(key='my_form'):
 
     for k in range(1,N+1):
@@ -67,17 +62,22 @@ with st.form(key='my_form'):
     #    st.write('The current number is ', Nmale)
         
         new_row = [str(int(crow.PreID)) + str(crow.ID), Nfemale, Nmale]
-    #    new_row
-    #    df = df.append(new_row, ignore_index=True)
+
+        st.write(str(int(crow.PreID)) + str(crow.ID))
+        st.write(new_row)
         
         df.loc[len(df)] = new_row
+        
+        
     #    df
+    outfile = os.path.join(setupBaseDir, "output.csv")
+    df.to_csv(outfile, mode='a', index=False, header=False)
     submit_button = st.form_submit_button(label='Submit')
     
 
 if submit_button:
-    outfile = os.path.join(setupBaseDir, "output.csv")
-    df.to_csv(outfile, mode='a', index=False, header=False)
+#    outfile = os.path.join(setupBaseDir, "output.csv")
+#    df.to_csv(outfile, mode='a', index=False, header=False)
     st.write("Thank you!")
     
 with open("output.csv") as f:
