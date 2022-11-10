@@ -47,7 +47,12 @@ def get_sample():
 if 'state' not in st.session_state:
     st.session_state.state = 'init'
     rows,subset = get_sample()
+else:
+    rows = rows
+    subset = subset
 
+"SUBSET"    
+subset
 
     
 st.title("Dear #Biohackathon2022,")
