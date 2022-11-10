@@ -57,7 +57,7 @@ else:
 #    subset = subset
 
     
-st.title("Dear #BioHackEU22 friends,")
+st.title("Dear #BioHackEU22 & friends,")
 st.subheader("Please evaluate the number of males and females in the following sentences:")
 #st.write("Please evaluate the number of males and females in the following sentences:")
 st.write("- If you are in doubt, put NA:")
@@ -92,7 +92,7 @@ with st.form(key='my_form', clear_on_submit=False):
     submit_button = st.form_submit_button(label='Submit') # submit_button = st.form_submit_button(label='Submit', on_click=save_df, args=(df,))
     if submit_button:
         outfile = os.path.join(setupBaseDir, "output.csv")
-        df.to_csv(outfile, mode='a', index=False, header=False)
+        df.to_csv(outfile, mode='w', index=False, header=False)
         st.success("Thank you!")
     
 #if submit_button:
