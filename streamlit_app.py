@@ -41,7 +41,7 @@ def get_sample():
     
     return(rows,subset)
     
-def save_df():
+def save_df(df):
     outfile = os.path.join(setupBaseDir, "output.csv")
     df.to_csv(outfile, mode='a', index=False, header=False)
     st.write("Thank you!")
@@ -81,7 +81,7 @@ with st.form(key='my_form', clear_on_submit=True):
         df.loc[len(df)] = new_row
           
     #    df
-    submit_button = st.form_submit_button(label='Submit', on_click=save_df)
+    submit_button = st.form_submit_button(label='Submit', on_click=save_df(df))
     
 #if submit_button:
 #        outfile = os.path.join(setupBaseDir, "output.csv")
