@@ -96,7 +96,7 @@ with st.form(key='my_form', clear_on_submit=False):
     if submit_button:
         outfile = os.path.join(setupBaseDir, "output.csv")
         df.to_csv(outfile, mode='a', index=False, header=False)
-        st.sucess("Thank you!")
+        st.success("Thank you!")
     
 #if submit_button:
 #        outfile = os.path.join(setupBaseDir, "output.csv")
