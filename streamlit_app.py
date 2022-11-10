@@ -29,12 +29,10 @@ def run_query(query):
     return rows
 
 sheet_url = st.secrets["public_gsheets_url"]
+rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-
-#@st.experimental_memo(suppress_st_warning=True)
+@st.experimental_memo(suppress_st_warning=True)
 def get_sample():
-    rows = run_query(f'SELECT * FROM "{sheet_url}"')
-
     subset = sample(range(0,len(rows)), N)
     #st.write("Subset")
     #subset
