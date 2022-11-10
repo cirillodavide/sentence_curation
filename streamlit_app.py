@@ -31,7 +31,7 @@ def run_query(query):
 sheet_url = st.secrets["public_gsheets_url"]
 
 
-@st.experimental_memo(suppress_st_warning=True)
+#@st.experimental_memo(suppress_st_warning=True)
 def get_sample():
     rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
@@ -40,6 +40,12 @@ def get_sample():
     #subset
     
     return(rows,subset)
+    
+def save_df():
+    outfile = os.path.join(setupBaseDir, "output.csv")
+    df.to_csv(outfile, mode='a', index=False, header=False)
+    st.write("Thank you!")
+    
     
 rows,subset = get_sample()
     
@@ -75,12 +81,12 @@ with st.form(key='my_form', clear_on_submit=True):
         df.loc[len(df)] = new_row
           
     #    df
-    submit_button = st.form_submit_button(label='Submit')
+    submit_button = st.form_submit_button(label='Submit', on_click=save_df)
     
-if submit_button:
-        outfile = os.path.join(setupBaseDir, "output.csv")
-        df.to_csv(outfile, mode='a', index=False, header=False)
-        st.write("Thank you!")
+#if submit_button:
+#        outfile = os.path.join(setupBaseDir, "output.csv")
+#        df.to_csv(outfile, mode='a', index=False, header=False)
+#        st.write("Thank you!")
 
 with open("output.csv") as f:
        st.download_button('', f)  # Defaults to 'text/plain' 
