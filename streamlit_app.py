@@ -57,7 +57,7 @@ st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
 #st.write("Thanks!")
 df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )    
         
-with st.form(key='my_form', clear_on_submit=True):
+with st.form(key='my_form', clear_on_submit=False):
 
     for k in range(1,N+1):
         st.title(str(k))
@@ -90,9 +90,6 @@ with st.form(key='my_form', clear_on_submit=True):
 
 with open("output.csv") as f:
        st.download_button('', f)  # Defaults to 'text/plain' 
-        
-
-
 
 #if st.button('Send'):
 #    df.to_csv(outfile, mode='a', index=False, header=False) 
