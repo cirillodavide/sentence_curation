@@ -81,7 +81,7 @@ with st.form(key='my_form', clear_on_submit=False):
         df.loc[len(df)] = new_row
           
     #    df
-    submit_button = st.form_submit_button(label='Submit', on_click=save_df(df))
+    submit_button = st.form_submit_button(label='Submit', on_click=save_df, args=(df,))
     
 #if submit_button:
 #        outfile = os.path.join(setupBaseDir, "output.csv")
