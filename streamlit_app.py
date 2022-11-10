@@ -47,9 +47,14 @@ def get_sample():
 if 'state' not in st.session_state:
     st.session_state.state = 'init'
     rows,subset = get_sample()
+    st.session_state.subset = subset
 else:
-    rows = rows
-    subset = subset
+    subset = st.session_state.subset
+    
+    
+#else:
+#    rows = rows
+#    subset = subset
 
 "SUBSET"    
 subset
@@ -63,7 +68,7 @@ st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
 #st.write("Thanks!")
 df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )    
         
-with st.form(key='my_form', clear_on_submit=True):
+with st.form(key='my_form', clear_on_submit=False):
 
     for k in range(1,N+1):
         st.title(str(k))
@@ -73,11 +78,11 @@ with st.form(key='my_form', clear_on_submit=True):
         
         st.write("Number of females")
         Nfemale = st.text_input("Insert a number or NA", value="", key="female"+str(k))
-    #    st.write('The current number is ', Nfemale)
+#        st.write('The current number is ', Nfemale)
         
         st.write("Number of males")
         Nmale = st.text_input("Insert a number or NA", value="", key="male"+str(k))
-    #    st.write('The current number is ', Nmale)
+#        st.write('The current number is ', Nmale)
         
         new_row = [str(int(crow.PreID)) + str(crow.ID), Nfemale, Nmale]
 
