@@ -123,6 +123,8 @@ with placeholder.container():
 if btn:
     #This would empty everything inside the container
     placeholder.empty()
+    rows,subset = get_sample()
+    st.session_state.subset = subset
     
 
 st.write("\n\n"); st.write("\n\n"); st.write("\n\n"); st.write("\n\n")
