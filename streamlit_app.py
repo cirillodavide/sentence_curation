@@ -37,9 +37,9 @@ def get_sample():
     #st.write("Subset")
     #subset
     
-    return(subset)
+    return(rows,subset)
     
-subset = get_sample()
+rows,subset = get_sample()
     
 st.title("Dear #Biohackathon2022,")
 st.subheader("Please evaluate the number of males and females in the following sentences:")
