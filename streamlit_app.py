@@ -31,12 +31,11 @@ def run_query(query):
 sheet_url = st.secrets["public_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-@st.experimental_memo(suppress_st_warning=True)
+#@st.experimental_memo(suppress_st_warning=True)
 def get_sample():
     subset = sample(range(0,len(rows)), N)
     #st.write("Subset")
     #subset
-    
     return(rows,subset)
     
 #def save_df(df):
@@ -44,8 +43,12 @@ def get_sample():
 #    df.to_csv(outfile, mode='a', index=False, header=False)
 #    st.write("Thank you!")
 #    
-    
-rows,subset = get_sample()
+
+if 'state' not in st.session_state:
+    st.session_state.state = 'init'
+    rows,subset = get_sample()
+
+
     
 st.title("Dear #Biohackathon2022,")
 st.subheader("Please evaluate the number of males and females in the following sentences:")
