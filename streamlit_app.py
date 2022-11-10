@@ -27,57 +27,67 @@ def run_query(query):
     return rows
 
 sheet_url = st.secrets["public_gsheets_url"]
-rows = run_query(f'SELECT * FROM "{sheet_url}"')
-
-subset = sample(range(0,len(rows)), N)
-#st.write("Subset")
-#subset
 
 
-pages = range(1,N+1)
 
-st.title("Dear #Biohackathon2022,")
-st.subheader("Please evaluate the number of males and females in the following sentences:")
-#st.write("Please evaluate the number of males and females in the following sentences:")
-st.write("- If you are in doubt, put NA:")
-st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
-#st.write("Thanks!")
+def run_app():
+    rows = run_query(f'SELECT * FROM "{sheet_url}"')
+
+    subset = sample(range(0,len(rows)), N)
+    #st.write("Subset")
+    #subset
     
-df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )
-    
-with st.form(key='my_form'):
 
-    for k in range(1,N+1):
-        st.title(str(k))
-        crow = rows[subset[k-1]]
-        #subset[choice-1]
-        st.subheader(crow.Sentence)
-        
-        st.write("Number of females")
-        Nfemale = st.text_input("Insert a number or NA", value="", key="female"+str(k))
-    #    st.write('The current number is ', Nfemale)
-        
-        st.write("Number of males")
-        Nmale = st.text_input("Insert a number or NA", value="", key="male"+str(k))
-    #    st.write('The current number is ', Nmale)
-        
-        new_row = [str(int(crow.PreID)) + str(crow.ID), Nfemale, Nmale]
 
-        st.write(str(int(crow.PreID)) + str(crow.ID))
-        st.write(new_row)
+    pages = range(1,N+1)
+    
+    st.title("Dear #Biohackathon2022,")
+    st.subheader("Please evaluate the number of males and females in the following sentences:")
+    #st.write("Please evaluate the number of males and females in the following sentences:")
+    st.write("- If you are in doubt, put NA:")
+    st.write("- If there is a percentage, add % at the end of the number (e.g. 5%)")
+    #st.write("Thanks!")
         
-        df.loc[len(df)] = new_row
-          
-    #    df
-    submit_button = st.form_submit_button(label='Submit')
+    df = pd.DataFrame(columns = ['ID', 'Nfemale', 'Nmale'] )
+        
+    with st.form(key='my_form'):
     
-if submit_button:
-    outfile = os.path.join(setupBaseDir, "output.csv")
-    df.to_csv(outfile, mode='a', index=False, header=False)
-    st.write("Thank you!")
+        for k in range(1,N+1):
+            st.title(str(k))
+            crow = rows[subset[k-1]]
+            #subset[choice-1]
+            st.subheader(crow.Sentence)
+            
+            st.write("Number of females")
+            Nfemale = st.text_input("Insert a number or NA", value="", key="female"+str(k))
+        #    st.write('The current number is ', Nfemale)
+            
+            st.write("Number of males")
+            Nmale = st.text_input("Insert a number or NA", value="", key="male"+str(k))
+        #    st.write('The current number is ', Nmale)
+            
+            new_row = [str(int(crow.PreID)) + str(crow.ID), Nfemale, Nmale]
     
-with open("output.csv") as f:
-   st.download_button('', f)  # Defaults to 'text/plain' 
+            st.write(str(int(crow.PreID)) + str(crow.ID))
+            st.write(new_row)
+            
+            df.loc[len(df)] = new_row
+              
+        #    df
+        submit_button = st.form_submit_button(label='Submit')
+        
+        if submit_button:
+        outfile = os.path.join(setupBaseDir, "output.csv")
+        df.to_csv(outfile, mode='a', index=False, header=False)
+        st.write("Thank you!")
+    
+        with open("output.csv") as f:
+           st.download_button('', f)  # Defaults to 'text/plain' 
+        
+
+run_app()
+    
+
 
 #if st.button('Send'):
 #    df.to_csv(outfile, mode='a', index=False, header=False) 
