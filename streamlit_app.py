@@ -77,9 +77,9 @@ def run_app():
         submit_button = st.form_submit_button(label='Submit')
         
         if submit_button:
-        outfile = os.path.join(setupBaseDir, "output.csv")
-        df.to_csv(outfile, mode='a', index=False, header=False)
-        st.write("Thank you!")
+            outfile = os.path.join(setupBaseDir, "output.csv")
+            df.to_csv(outfile, mode='a', index=False, header=False)
+            st.write("Thank you!")
     
         with open("output.csv") as f:
            st.download_button('', f)  # Defaults to 'text/plain' 
